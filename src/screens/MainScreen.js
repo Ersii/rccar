@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, TextInput, TouchableHighlight,Image} from 'react-native';
 
-import SocketIOClient from 'socket.io-client';
-
-export default class MainScreen extends Component{
+export default class MainScreen extends React.Component{
     constructor(props){
         super(props)
         const{navigation} = this.props;
@@ -26,7 +24,7 @@ export default class MainScreen extends Component{
 
      render(){
         return <MainScreen
-            sendDataInterval={200}
+            sendDataInterval={1000}
             ip={this.props.navigation.state.params.ip}
             {this.props}
             {this.functions}
@@ -35,7 +33,8 @@ export default class MainScreen extends Component{
 
 }
 
-const MainScreen = (props) => {
+//INTERFACE STRUCTURE
+/*const MainScreen = (props) => {
 	return(
       <View style={{flex: 2}}>
         <View style={styles.topContainer}>
@@ -71,6 +70,7 @@ const MainScreen = (props) => {
     );
 }
 
+//INTERFACE STYLE
 const styles = StyleSheet.create({
    buttonRowContainer: {
     flex: 1, 
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
 
 });
 
-//export default MainScreen;
+export default MainScreen;*/
