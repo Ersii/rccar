@@ -1,13 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, TextInput, TouchableHighlight} from 'react-native';
-import io from 'socket.io-client';
 
 
-export default class ConnectScreen extends Component{
+export default class ConnectScreen extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			ip: "192.168.1.172", //ip rpi
+			ip: "localhost", //ip rpi 192.168.1.172
 			connecting: false,
 		}
 
@@ -26,16 +25,16 @@ export default class ConnectScreen extends Component{
 	}
 
 	connectWifi(){
-		let socketIO = io("http://"+this.state.ip+":9000", {transports:['websocket']});
+		let socketIO = io("http://"+this.state.ip+":8888", {transports:['websocket']});
 		this.setState({connecting:true});
-		console.log("connecting to http://"+this.state.ip+":9000 ...");
+		console.log("connecting to http://"+this.state.ip+":8888 ...");
 
 		socketIO.on('connection_successful', () =>{
 			this.props.navigation.navigate('Main', {socketIO, ip:this.state.ip});
 			this.setState({connecting:false});
 		});
 
-		//ak nepride potvrdenie zo servera do 3.5s tak connection failed
+		//checking if connection with server was succesfull
 		setTimeout(() =>{
 			if(this.state.connecting){
 				this.setState({connecting:false});
@@ -48,7 +47,7 @@ export default class ConnectScreen extends Component{
 
 }
 
-
+//INTERFACE STRUCTURE
 /*const ConnectScreen = (props) => {
 //console.log(props);
 	return(
@@ -64,6 +63,7 @@ export default class ConnectScreen extends Component{
 	);
 }*/
 
+//INTERFACE STYLE
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
