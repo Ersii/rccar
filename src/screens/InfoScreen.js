@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, TextInput, TouchableHighlight,Image} from 'react-native';
 
-
 const InfoScreen = (props) => {
 	return(
       <View style={{flex: 2}}>
