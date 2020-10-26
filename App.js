@@ -6,6 +6,7 @@ import ConnectScreen from './src/screens/ConnectScreen';
 import MainScreen from './src/screens/MainScreen';
 import InfoScreen from './src/screens/InfoScreen';
 
+
 const navigator = createStackNavigator(
     {
       Connect: ConnectScreen,
