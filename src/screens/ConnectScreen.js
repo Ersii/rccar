@@ -1,30 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet, Button, TextInput, TouchableHighlight} from 'react-native';
-
+import socketIO from 'socket.io-client';
+import io from 'socket.io-client';
 
 export default class ConnectScreen extends React.Component{
 	constructor(props){
 		super(props)
 		this.state = {
-			ip: "localhost", //ip rpi 192.168.1.172
+			ip: "10.0.2.2", //ip rpi 192.168.1.172
 			connecting: false,
 		}
-
-		return(
-			<View style={styles.container}>
-				<Text style={styles.txt}>Connect to IP:</Text>
-				<TextInput
-					style={{ height: 60, borderColor: 'gray', borderWidth: 1 }}
-				/>
-				<TouchableHighlight style={styles.button} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={this.connectWifi()}>
-					<Text style={styles.txt}> CONNECT </Text>
-				</TouchableHighlight>
-			</View>
-		);
-
 	}
 
-	connectWifi(){
+	connectWifi = () => {
 		let socketIO = io("http://"+this.state.ip+":8888", {transports:['websocket']});
 		this.setState({connecting:true});
 		console.log("connecting to http://"+this.state.ip+":8888 ...");
@@ -44,6 +32,19 @@ export default class ConnectScreen extends React.Component{
 		},3500);
 	}
 
+	render(){
+		return(
+			<View style={styles.container}>
+				<Text style={styles.txt}>Connect to IP:</Text>
+				<TextInput
+					style={{ height: 60, borderColor: 'gray', borderWidth: 1 }}
+				/>
+				<TouchableHighlight style={styles.button} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={this.connectWifi}>
+					<Text style={styles.txt}> CONNECT </Text>
+				</TouchableHighlight>
+			</View>
+		);
+	}
 
 }
 
